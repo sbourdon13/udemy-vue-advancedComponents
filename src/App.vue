@@ -13,13 +13,24 @@
           </component>
         </keep-alive>-->
         <br>
-        <button class="btn btn-primary">Load Blue Template</button>
-        <button class="btn btn-success" style="margin: 0 20px">Load Green Template</button>
-        <button class="btn btn-danger">Load Red Template</button>
+        <button class="btn btn-primary" @click="selectedTemplate = 'appBlue'">Load Blue Template</button>
+        <button
+          class="btn btn-success"
+          @click="selectedTemplate = 'appGreen'"
+          style="margin: 0 20px"
+        >Load Green Template</button>
+        <button class="btn btn-danger" @click="selectedTemplate = 'appRed'">Load Red Template</button>
         <hr>
-        <app-blue></app-blue>
-        <app-green></app-green>
-        <app-red></app-red>
+        <keep-alive>
+          <component :is="selectedTemplate">
+            <h3>Your amazing quote:</h3>
+            <em>In ancient times cats were worshipped as gods; they have not forgotten this.</em>
+            <p>
+              By
+              <strong>Terry Pratchett</strong>
+            </p>
+          </component>
+        </keep-alive>
       </div>
     </div>
   </div>
@@ -36,7 +47,8 @@ import Red from "./components/Red.vue";
 export default {
   data() {
     return {
-      selectedComponent: "appQuote"
+      selectedComponent: "appQuote",
+      selectedTemplate: "appBlue"
     };
   },
   components: {
